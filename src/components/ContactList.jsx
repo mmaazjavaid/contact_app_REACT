@@ -1,13 +1,14 @@
 import React from 'react'
+import uuid from 'react-uuid'
 import ContactCard from './ContactCard'
 
 function ContactList({contacts}) {
   return (
     <div className='ui celled list'>
-     {contacts.map((contact)=>{
+     {contacts.map((contact,index)=>{
       return(
         
-        <ContactCard name={contact.name} email={contact.email} />
+        <ContactCard key={uuid()} name={contact.name} email={contact.email} />
       )
      })}
 
