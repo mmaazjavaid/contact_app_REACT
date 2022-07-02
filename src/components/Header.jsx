@@ -12,7 +12,7 @@ function Header() {
           <Link className='ui button blue' to='addContact'>Add Contact</Link>
         </div>
         <div>
-        <Link to='contactlist' className='ui button blue'>Contacat List</Link>
+        <Link to='contactlist' className='ui button blue'>Contact List</Link>
         </div>
 
 

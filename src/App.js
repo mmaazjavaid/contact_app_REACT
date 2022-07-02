@@ -4,6 +4,7 @@ import uuid from 'react-uuid';
 import './App.css';
 import AddContact from './components/AddContact';
 import ContactCard from './components/ContactCard';
+import ContactDetails from './components/ContactDetails';
 import ContactList from './components/ContactList';
 import Header from './components/Header';
 function App() {
@@ -38,7 +39,7 @@ function App() {
     
         <Route path='/addContact' element={<AddContact handleSubmit={handleSubmit} />} />
         <Route path='/contactlist' element={<ContactList  handleDelete={handleDelete}  contacts={Contacts}/>} />
-        
+        <Route path='/contactdetails/:email/:name' element={<ContactDetails/>}/>
       </Routes>
       
       </BrowserRouter>

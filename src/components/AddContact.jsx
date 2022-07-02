@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-
+import {useNavigate} from 'react-router-dom'
 function AddContact(props) {
+  let navigate =useNavigate()
   const [user,setUser]=useState({
     "name":"",
     "email":""
@@ -13,6 +14,7 @@ function AddContact(props) {
       "name":"",
       "email":""
     })
+    navigate('/contactlist')
   }
   return (
     
