@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import uuid from 'react-uuid';
 import './App.css';
 import AddContact from './components/AddContact';
 import ContactCard from './components/ContactCard';
@@ -17,15 +18,22 @@ function App() {
     setContacts((prev)=>{
       return[
       ...prev,
-      user
+      {id:uuid(),...user}
       ]
     })
+  }
+  const handleDelete=(id)=>{
+    alert("contact will be deleted")
+   const filtered_array= Contacts.filter((prev)=>{
+    return id!==prev.id
+   })
+   setContacts(filtered_array)
   }
   return (
     <div className='ui container'>
       <Header/>
       <AddContact handleSubmit={handleSubmit} />
-      <ContactList contacts={Contacts}/>
+      <ContactList  handleDelete={handleDelete}  contacts={Contacts}/>
     </div>
   );
 }

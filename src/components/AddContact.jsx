@@ -9,6 +9,7 @@ function AddContact(props) {
     e.preventDefault()
     props.handleSubmit(user);
     setUser({
+      
       "name":"",
       "email":""
     })
