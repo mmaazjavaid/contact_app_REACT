@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter ,Route,Routes} from 'react-router-dom';
 import uuid from 'react-uuid';
 import './App.css';
 import AddContact from './components/AddContact';
@@ -31,9 +32,17 @@ function App() {
   }
   return (
     <div className='ui container'>
+      <BrowserRouter>
       <Header/>
-      <AddContact handleSubmit={handleSubmit} />
-      <ContactList  handleDelete={handleDelete}  contacts={Contacts}/>
+      <Routes>
+    
+        <Route path='/addContact' element={<AddContact handleSubmit={handleSubmit} />} />
+        <Route path='/contactlist' element={<ContactList  handleDelete={handleDelete}  contacts={Contacts}/>} />
+        
+      </Routes>
+      
+      </BrowserRouter>
+      
     </div>
   );
 }

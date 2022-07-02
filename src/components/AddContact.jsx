@@ -16,7 +16,7 @@ function AddContact(props) {
   }
   return (
     
-    <div className='ui main'>
+    <div style={{marginTop:'70px'}} className='ui main'>
       <h2>Add contact</h2>
       <form onSubmit={handleSubmit} className='ui form'>
         <div className='field'>

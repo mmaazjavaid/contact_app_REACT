@@ -4,7 +4,8 @@ import ContactCard from './ContactCard'
 
 function ContactList({contacts,handleDelete}) {
   return (
-    <div className='ui celled list'>
+
+    <div style={{marginTop:'70px'}} className='ui celled list'>
      {contacts.map((contact,index)=>{
       return(
         
