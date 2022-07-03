@@ -11,21 +11,28 @@ import Header from './components/Header';
 function App() {
   const [Contacts,setContacts]=useState([]);
   const [searchTerm,setsearchTerm]=useState("");
-
+  const [saerchResults,setsaerchResults]=useState([]);
   const getContacts=async()=>{
     const res=await api.get('/contacts');
     const data= await res.data
     setContacts(data)
-    
   }
 
   const handleSearch =(keyword)=>{
       setsearchTerm(keyword)
-      
   }
-   
+  useEffect(()=>{
+    if(searchTerm!==""){
+      const filteredArray=Contacts.filter((contact)=>{
+        return Object.values(contact).join(" ").toLowerCase().includes(searchTerm.toLowerCase())
+      })
+      setsaerchResults(filteredArray)
+    }else{
+      setsaerchResults(Contacts)
+    }
+  },[searchTerm]) 
   console.log(searchTerm)
-
+  console.log(saerchResults)
   useEffect(()=>{
   getContacts()
   },[])
@@ -57,7 +64,7 @@ function App() {
       <Routes>
     
         <Route path='/addContact' element={<AddContact handleSubmit={handleSubmit} />} />
-        <Route path='/contactlist' element={<ContactList handleSearch={handleSearch}  handleDelete={handleDelete} searchTerm={searchTerm}  contacts={Contacts}/>} />
+        <Route path='/contactlist' element={<ContactList handleSearch={handleSearch}  handleDelete={handleDelete} searchTerm={searchTerm}  contacts={searchTerm.length<1? Contacts:saerchResults}/>} />
         <Route path='/contactdetails/:email/:name' element={<ContactDetails/>}/>
       </Routes>
       
