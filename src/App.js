@@ -31,8 +31,7 @@ function App() {
       setsaerchResults(Contacts)
     }
   },[searchTerm]) 
-  console.log(searchTerm)
-  console.log(saerchResults)
+  
   useEffect(()=>{
   getContacts()
   },[])
@@ -52,7 +51,6 @@ function App() {
   }
   const handleDelete= async(id)=>{
   const res=await api.delete(`/contacts/${id}`);
-  console.log(res.status)
   setContacts(Contacts.filter((prev)=>{
     return id!==prev.id
   }))
