@@ -10,21 +10,23 @@ import api from './api';
 import Header from './components/Header';
 function App() {
   const [Contacts,setContacts]=useState([]);
-  useEffect(()=>{
-    
-  },[Contacts])
-
+  const [searchTerm,setsearchTerm]=useState("");
 
   const getContacts=async()=>{
     const res=await api.get('/contacts');
     const data= await res.data
     setContacts(data)
-    console.log("hello")
+    
   }
 
+  const handleSearch =(keyword)=>{
+      setsearchTerm(keyword)
+      
+  }
+   
+  console.log(searchTerm)
+
   useEffect(()=>{
-  //  var data= localStorage.getItem("contacts")
-  //  setContacts(JSON.parse(data));
   getContacts()
   },[])
   
@@ -34,7 +36,6 @@ function App() {
       ...user
     }
     const response =await api.post('/contacts',request)
-    console.log(response.data);
     setContacts((prev)=>{
       return[
       ...prev,
@@ -56,7 +57,7 @@ function App() {
       <Routes>
     
         <Route path='/addContact' element={<AddContact handleSubmit={handleSubmit} />} />
-        <Route path='/contactlist' element={<ContactList  handleDelete={handleDelete}  contacts={Contacts}/>} />
+        <Route path='/contactlist' element={<ContactList handleSearch={handleSearch}  handleDelete={handleDelete} searchTerm={searchTerm}  contacts={Contacts}/>} />
         <Route path='/contactdetails/:email/:name' element={<ContactDetails/>}/>
       </Routes>
       

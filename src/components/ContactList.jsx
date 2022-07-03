@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import uuid from 'react-uuid'
 import ContactCard from './ContactCard'
 
-function ContactList({contacts,handleDelete}) {
+function ContactList({contacts,handleDelete,searchTerm,handleSearch}) {
+  let inputref=useRef();
+  const valChanageHandler=()=>{
+    handleSearch(inputref.current.value);
+  }
   return (
 <>
 <div  className='ui search' style={{marginTop:'70px'}} >
   <div className='ui icin input'>
-    <input type="text" placeholder='Search' className='prompt' />
+    <input type="text" ref={inputref} placeholder='Search' onChange={valChanageHandler} className='prompt' value={searchTerm} />
     <i className='search icon'></i>
   </div>
 </div>
