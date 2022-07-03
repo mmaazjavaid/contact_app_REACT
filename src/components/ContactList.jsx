@@ -4,8 +4,14 @@ import ContactCard from './ContactCard'
 
 function ContactList({contacts,handleDelete}) {
   return (
-
-    <div style={{marginTop:'70px'}} className='ui celled list'>
+<>
+<div  className='ui search' style={{marginTop:'70px'}} >
+  <div className='ui icin input'>
+    <input type="text" placeholder='Search' className='prompt' />
+    <i className='search icon'></i>
+  </div>
+</div>
+<div style={{marginTop:'10px'}} className='ui celled list'>
      {contacts.map((contact,index)=>{
       return(
         
@@ -14,6 +20,8 @@ function ContactList({contacts,handleDelete}) {
      })}
 
     </div>
+</>
+    
   )
 }
 
