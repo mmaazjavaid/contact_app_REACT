@@ -6,30 +6,48 @@ import AddContact from './components/AddContact';
 import ContactCard from './components/ContactCard';
 import ContactDetails from './components/ContactDetails';
 import ContactList from './components/ContactList';
+import api from './api';
 import Header from './components/Header';
 function App() {
-  const [Contacts,setContacts]=useState( JSON.parse(localStorage.getItem("contacts")));
+  const [Contacts,setContacts]=useState([]);
   useEffect(()=>{
-    localStorage.setItem("contacts",JSON.stringify(Contacts));
+    
   },[Contacts])
+
+
+  const getContacts=async()=>{
+    const res=await api.get('/contacts');
+    const data= await res.data
+    setContacts(data)
+    console.log("hello")
+  }
+
   useEffect(()=>{
-   var data= localStorage.getItem("contacts")
-   setContacts(JSON.parse(data));
+  //  var data= localStorage.getItem("contacts")
+  //  setContacts(JSON.parse(data));
+  getContacts()
   },[])
-  const handleSubmit=(user)=>{
+  
+  const handleSubmit= async(user)=>{
+    const request={
+      id:uuid(),
+      ...user
+    }
+    const response =await api.post('/contacts',request)
+    console.log(response.data);
     setContacts((prev)=>{
       return[
       ...prev,
-      {id:uuid(),...user}
+      response.data
       ]
     })
   }
-  const handleDelete=(id)=>{
-    alert("contact will be deleted")
-   const filtered_array= Contacts.filter((prev)=>{
+  const handleDelete= async(id)=>{
+  const res=await api.delete(`/contacts/${id}`);
+  console.log(res.status)
+  setContacts(Contacts.filter((prev)=>{
     return id!==prev.id
-   })
-   setContacts(filtered_array)
+  }))
   }
   return (
     <div className='ui container'>
